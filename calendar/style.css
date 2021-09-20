@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.app {
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 1fr;
+  /* justify-content: center; */
+  /* align-items: center; */
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(7, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+  width: 100%;
+  height: 100%;
+  background: #E9E9E9;
+  background: #ffffff60;
+}
+
+.calendar-day {
+  width: 100%;
+  height: 100%;
+  min-height: 65px;
+  padding: 5px 7px;
+  background: #E6E6E6;
+  background: #EFEFEF;
+}
+
+.day-top-row {
+  font-size: 0.7em;
+  text-align: center;
+  padding: 2px;
+}
+
+
+.calendar {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 30px 1fr;
+  height: fit-content;
+  /* border:1px solid #E9E9E9; */
+  border-left:3px solid #fff;
+  border-right:3px solid #fff;
+}
+
+.day-label-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+  background: #EFEFEF;
+}
+
+.day-label {
+  padding: 5px 7px;
+  font-size: 0.8em;
+  font-weight: 500;
+  text-align: center;
+  background: #E6E6E6;
+  
+  background: #3B44A1
+}
