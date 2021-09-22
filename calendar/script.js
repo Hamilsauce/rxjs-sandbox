@@ -29,6 +29,7 @@ const daysInMonth = (month = new Date().getMonth(), year = new Date().getFullYea
 //TODO loop while <= daysInMonth to create
 // Day Objects containing: 
 // name, WeekOfMonth, dayOfMonth, DayOfWeek, 
+// name, WeekOfMonth, dayOfMonth, DayOfWeek, 
 // hasOccurred, hasEvent
 
 const getDayName = (dateStr, locale = 'en-US') => {

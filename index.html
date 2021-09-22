@@ -6,28 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
   <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js" integrity="sha512-y3JTS47nnpKORJX8Jn1Rlm+QgRIIZHtu3hWxal0e81avPrqUH48yk+aCi+gprT0RMAcpYa0WCkapxe+bpBHD6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
-  <main id="app">
+  <div class="countdown">
+    <h4>
+      Time remaining: <span id="remaining"></span>
+    </h4>
+    <button id="pause">
+      Pause Timer
+    </button>
+    <button id="resume">
+      Resume Timer
+    </button>
+  </div>
+  <div id="app" style="display: none;">
     <input spellcheck="true" type="text" name="input1" id="input1" value="Spell check spellcheck sepll check sepllcheck" />
     <div class="editable1" contenteditable="true">
       Spell check spellcheck sepll check sepllcheck
-      <div class="">nested div1</div>
-      <div class="">
+      <div class="drbb">nested div1</div>
+      <div class="frd">
         nested di
-      <div class="">super nected div</div>
-        
+        <div class="butt1">super nected div</div>
       </div>
     </div>
-    <button id="toggle-button"  class=" button" type="button">Press me</button>
-<div id="polling-status"></div> 
-<div id="output"></div> 
-  </main>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js" integrity="sha512-y3JTS47nnpKORJX8Jn1Rlm+QgRIIZHtu3hWxal0e81avPrqUH48yk+aCi+gprT0RMAcpYa0WCkapxe+bpBHD6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="script.js" type="module"></script>
-  <script src="misc.js" type="module"></script>
-  <script src="CoinService.js" type="module"></script>
+    <button id="toggle-button" class=" button" type="button">Press me</button>
+    <div id="polling-status"></div>
+    <div id="output"></div>
+  </div>
+  <!-- <script src="script.js"></script> -->
+  <script src="countdown-timer.js" type="module"></script>
+  <!-- <script src="CoinService.js" type="module"></script> -->
 </body>
 
 </html>
