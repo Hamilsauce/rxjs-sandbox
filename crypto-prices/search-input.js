@@ -1,7 +1,7 @@
 import CoinService from './CoinService.js'
 import syms from './coin-symbols.js'
 const { interval, of , fromEvent, merge, empty, from } = rxjs;
-const { switchMap, scan, takeWhile,map, tap, startWith,filter, mapTo } = rxjs.operators;
+const { switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
 const COUNTDOWN_SECONDS = 10;
 
 const app = document.querySelector('.app');
@@ -10,7 +10,7 @@ const children = [...document.querySelector('.app').children];
 const coinService = new CoinService();
 
 
-const symbols$ = of(syms)
+const symbols$ = of (syms)
 console.log('searchInput', searchInput)
 
 /*
@@ -18,17 +18,28 @@ console.log('searchInput', searchInput)
  
  */
 
-const input$ = fromEvent(searchInput, 'input');
-const inputValue$ = of(searchInput.value);
+const input$ = fromEvent(searchInput, 'input')
+// .pipe(switchMap(e => e.target.value))
+const inputValue$ = of (searchInput.value);
 // const fetchCoin$ = from(coinService.fetchCoin());
 
-inputValue$.pipe(
-  filter(e => e.include(e.target.value)),
-  map(e => e),
-  tap(e => console.log('inputValue$', e))
-  
-).subscribe();
+const search$ = input$.pipe(
+  map(e => e.target.value),
+  filter(value => value.length >= 3),
+  switchMap(val => {
+    console.log('start of swirchmap', val);
+    return symbols$.pipe(
+      map(symbols => {
+        const symbolMatch = symbols.includes(val);
+        console.log('symbolMatch', symbolMatch)
+      })
+    )
+  }),
+);
+
+search$.subscribe()
+
 // input$.pipe(
 //   map(e => e.target.value)
-  
+
 // ).subscribe();

@@ -21,19 +21,24 @@ app.addEventListener('dataloaded', ({ detail }) => {
 coinService.fetchCoin('', app)
 
 
-// let count = 9;
+let count = 9;
 
-// const timer = (count) => {
-//   let t;
+const timer1 = (n) => {
+  if (n <= 0) return n;
+  else {
+    console.log(n);
+ 
+    setTimeout(() => {
+      timer1(--n)
+    }, 500);
 
-//   setTimeout(() => {
-//     count -= 1
-//   }, 1000);
-//   console.log(count);
-//   if (count <= 0) return count;
-//   timer(count)
-// }
-// timer(count)
+  }
+
+  // return count
+}
+timer1(count)
+
+/*
 
 const remainingLabel = document.getElementById('remaining');
 const pauseButton = document.getElementById('pause');
@@ -58,3 +63,4 @@ const timer$ = merge(pause$, resume$)
   )
   .subscribe((val) => (remainingLabel.innerHTML = val));
   
+  */

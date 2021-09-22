@@ -7,9 +7,10 @@
 .app {
   display: grid;
   /* grid-template-rows: repeat(2, minmax(100px, 175px)); */
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 50px 1fr;
   grid-template-columns: 1fr;
-  align-items: center;
+ /* justify-content: flex-start; */
+  /* align-items: center; */
   gap: 10px;
   min-width: 100vw;
   min-height: 100vh;
@@ -17,20 +18,20 @@
   color: #FFF0F0;
 }
 
-.app>div {
+/* .app>div {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   gap: 20px;
 }
-
+ */
 .crypto {
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* align-items: flex-start; */
+  align-items: flex-start;
   gap: 54px;
 
   padding: 20px;
