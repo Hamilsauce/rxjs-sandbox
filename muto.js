@@ -1,5 +1,5 @@
 // Select the node that will be observed for mutations
-const targetNode = document.querySelector('.app');
+const targetNode = document.querySelector('.muto');
 // Options for the observer (which mutations to observe)
 const config = { attributes: true, childList: true, subtree: true };
 

@@ -27,5 +27,3 @@ export default input$.pipe(
     )
   })
 );
-
-// coinSearch$.subscribe(x => console.log('in sub', x));
