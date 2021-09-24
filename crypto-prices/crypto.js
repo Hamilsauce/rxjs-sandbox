@@ -1,41 +1,41 @@
 import CoinService from './CoinService.js'
+import searchInput$ from './search-input.js'
 const { interval, fromEvent, merge, empty } = rxjs;
-const { switchMap, scan, takeWhile, startWith, mapTo } = rxjs.operators;
+const { switchMap, scan, takeWhile, startWith, map, mapTo } = rxjs.operators;
 const COUNTDOWN_SECONDS = 10;
 
 const app = document.querySelector('.app');
 const coinService = new CoinService();
-console.log('coinService', coinService)
+// console.log('coinService', coinService)
 
+searchInput$.pipe(
+  map(({ data }) => {
+    app.querySelector('.name-output').textContent = data.name;
+    app.querySelector('.price-output').textContent = data.ohlc.c;
+    return data
+  })
+).subscribe();
 
 app.addEventListener('dataloaded', ({ detail }) => {
   const nameEl = app.querySelector('.name-output');
   const priceEl = app.querySelector('.price-output');
-  // console.log('e.detail.data', detail.data)
-  // console.log('Object.values(detail.data).name', Object.values(detail.data))
-  nameEl.textContent = Object.values(detail.data)[0].name
-  priceEl.textContent = Object.values(detail.data)[0].change.value;
+  // nameEl.textContent = Object.values(detail.data)[0].name
+  // priceEl.textContent = Object.values(detail.data)[0].change.value;
   // nameEl.textContent = detail.data.sym.value
-
 });
+
 coinService.fetchCoin('', app)
 
 
+// Homemade Recusrive timer
 let count = 9;
-
 const timer1 = (n) => {
   if (n <= 0) return n;
   else {
     console.log(n);
- 
-    setTimeout(() => {
-      timer1(--n)
-    }, 500);
-
+    setTimeout(() => timer1(--n), 500)
   }
-
-  // return count
-}
+};
 timer1(count)
 
 /*

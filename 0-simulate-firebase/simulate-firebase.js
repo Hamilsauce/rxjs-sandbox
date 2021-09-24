@@ -13,17 +13,17 @@ console.log('simulating HTTP requests');
 const http1$ = simulateHttp("1", 1000);
 const http2$ = simulateHttp("2", 1000);
 
-http1$.subscribe(
-  console.log,
-  console.error,
-  () => console.log('http1$ completed')
-);
+// http1$.subscribe(
+//   console.log,
+//   console.error,
+//   () => console.log('http1$ completed')
+// );
 
-http2$.subscribe(
-  console.log,
-  console.error,
-  () => console.log('http2$ completed')
-)
+// http2$.subscribe(
+//   console.log,
+//   console.error,
+//   () => console.log('http2$ completed')
+// )
 
 //* FAKE HTTP FLOW 
 const saveUser$ = simulateHttp(' user saved ', 1000);
@@ -35,28 +35,31 @@ let httpResult$ = saveUser$.pipe(
   })
 );
 
-httpResult$.subscribe(console.log, console.error, () => console.log('completed httpResult$'));
+// httpResult$.subscribe(console.log, console.error, () => console.log('completed httpResult$'));
 
-
-
-//* FAKE FIREBASE FLOW 
+/* TODO
+*
+ * FAKE FIREBASE FLOW 
+*
+  TODO */
 
 function simulateFirebase(val, delay) {
-  return interval(delay).pipe(map((index) => val + ' ' + index));
+  return interval(delay).pipe(map((index) => `${val} ${index}`));
 }
 
-const firebase1$ = simulateFirebase('FB-1 ', 5000);
-const firebase2$ = simulateFirebase('FB-2 ', 1000);
+const firebase1$ = simulateFirebase('firebase1$ ', 2000);
+const firebase2$ = simulateFirebase('firebase2$ ',500);
 
 
 //! Simple switchMap example
 const firebaseResult$ = firebase1$.pipe(
   switchMap((sourceValue) => {
     console.log('source value ' + sourceValue);
-    return simulateFirebase('inner observable ', 1000);
+    return simulateFirebase('inner observable ', 800);
   })
 );
-firebaseResult$.subscribe(console.log, console.error, () => console.log('completed firebaseResult$'));
+const merger$ = merge(firebase1$, firebase2$, firebaseResult$)
+merger$.subscribe(console.log, console.error, () => console.log('completed firebaseResult$'));
 
 
 
@@ -69,4 +72,4 @@ httpResult$ = course$.pipe(
   )
 );
 
-httpResult$.subscribe(console.log, console.error, () => console.log('completed httpResult$'));
+// httpResult$.subscribe(console.log, console.error, () => console.log('completed httpResult$'));

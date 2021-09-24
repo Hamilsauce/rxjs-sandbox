@@ -11,19 +11,24 @@ export default class {
     this.listeners.forEach(l => l.addEventListener('dataloaded', ))
   }
 
+  getCoinUrl(sym) {
+  
+    return `https://production.api.coindesk.com/v2/tb/price/ticker?assets=${sym}`;
+  }
+
   async fetchCoin(symbol = '', ...listeners) {
     let sym = symbol.length === 0 ? 'BTC' : symbol;
     let url = `${this.BASE_URL}${sym}`;
-  
+
     const filteredListeners = listeners
       .filter(l => l instanceof Element);
 
     const res = await fetch(url);
     const data = await res.json();
     const coinData = data.data;
- 
+
     // console.log('coindata.data', coinData);
-    
+
     filteredListeners.forEach(l => this.emitNotesLoaded(l, coinData));
     return coinData;
   }
