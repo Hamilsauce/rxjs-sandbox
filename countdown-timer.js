@@ -1,7 +1,7 @@
 // RxJS v6+
 const { interval, fromEvent, merge, empty } = rxjs;
 const { switchMap, scan, takeWhile, startWith, mapTo } = rxjs.operators;
-const COUNTDOWN_SECONDS = 10;
+ const COUNTDOWN_SECONDS = 10;
 
 const remainingLabel = document.getElementById('remaining');
 const pauseButton = document.getElementById('pause');

@@ -5,6 +5,9 @@ const { switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } =
 
 // console.log('delay', delay);
 
+const app = document.querySelector('.app')
+const log = app.querySelector('.log')
+
 function simulateHttp(val, del) {
   return of(val).pipe(delay(del));
 }
@@ -44,18 +47,27 @@ let httpResult$ = saveUser$.pipe(
   TODO */
 
 function simulateFirebase(val, delay) {
-  return interval(delay).pipe(map((index) => `${val} ${index}`));
+
+  return interval(delay).pipe(map((index) => {
+      let newEl = document.createElement('div')
+      newEl.textContent = `${val} ${index}`
+      log.appendChild(newEl)
+      return `${val} ${index}`
+  }));
 }
 
-const firebase1$ = simulateFirebase('firebase1$ ', 2000);
-const firebase2$ = simulateFirebase('firebase2$ ',500);
+const firebase1$ = simulateFirebase('BEAT 1 ', 200);
+const firebase2$ = simulateFirebase('BEAT 2 ', 1200);
 
 
 //! Simple switchMap example
 const firebaseResult$ = firebase1$.pipe(
   switchMap((sourceValue) => {
     console.log('source value ' + sourceValue);
-    return simulateFirebase('inner observable ', 800);
+    let newEl = document.createElement('div')
+    newEl.textContent = 'BEAT 0 ' + sourceValue;
+    log.appendChild(newEl)
+    return simulateFirebase('BEAT 10 ', 1600);
   })
 );
 const merger$ = merge(firebase1$, firebase2$, firebaseResult$)
@@ -67,7 +79,7 @@ merger$.subscribe(console.log, console.error, () => console.log('completed fireb
 const course$ = simulateHttp({ id: 1, description: 'Angular For Beginners' }, 1000);
 
 httpResult$ = course$.pipe(
-  switchMap((courses) => simulateHttp([], 2000)
+  switchMap((courses) => simulateHttp([], 1200)
     .pipe(map((lessons) => [courses, lessons]))
   )
 );
