@@ -2,8 +2,6 @@ const { Observable, merge, finalize, timer, from, of , range, interval, fromEven
 const { bufferWhen, takeUntil, switchMap, mapTo, mergeMap, filter, map, tap, take } = rxjs.operators;
 
 const BASE_URL = `https://production.api.coindesk.com/v2/tb/price/ticker?assets=`;
-const CATS_URL = "https://placekitten.com/g/{w}/{h}";
-const MEATS_URL = "https://baconipsum.com/api/?type=meat-and-filler";
 const CRYPTO_URL = `${BASE_URL}BTC`;
 
 const fetchCoin = async (symbol) => {
@@ -12,9 +10,6 @@ const fetchCoin = async (symbol) => {
   console.log('result', result);
   return result
 };
-
-// Constants for Cat Requests
-
 
 function mapCrypto(response) {
   console.log('mapCrypto(response)', JSON.parse(response).data)
@@ -27,16 +22,17 @@ function mapCrypto(response) {
  * Our Operating State
  *************************/
 // Which type of data we are requesting
-let requestCategory = 'cats';
+let requestCategory = 'crypto';
 let pollingSub$;
 
-const categoryMap = new Map(
-  [
-    ['crypto', { url: CRYPTO_URL, mapper: mapCrypto }]
-  ])
+/**
+ * This function will make an AJAX request to the given Url, map the 
+ * JSON parsed repsonse with the provided mapper function, and emit
+ * the result onto the returned observable.
+ */
+const categoryMap = new Map([['crypto', { url: CRYPTO_URL, mapper: mapCrypto }]])
 
 // function requestData(url, mapFunc) {
-//   console.log(url)
 //   const xhr = new XMLHttpRequest();
 //   return from(new Promise((resolve, reject) => {
 
@@ -70,7 +66,6 @@ const categoryMap = new Map(
 function startPolling(category, interval = 2000) {
   console.log('category', category)
   const mapData = categoryMap.get(category);
-
   return timer(0, interval)
     .pipe(
       switchMap(_ => requestData(mapData.url, mapData.mapper))
@@ -96,7 +91,6 @@ let stopPolling$ = fromEvent(stopButton, 'click');
 function updateDom(result) {
    if (requestCategory === 'crypto') {
     console.log('crypto in updateDom', result);
-    // text.innerHTML = `BTC High: $${result}`;
     text.innerHTML = `BTC Circulation: ${result}`;
   }
 }
