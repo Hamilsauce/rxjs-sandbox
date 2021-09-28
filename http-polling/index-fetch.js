@@ -35,7 +35,8 @@ function mapCrypto(response) {
   console.log('mapCrypto(response)', JSON.parse(response).data)
   const numberFormatter = Intl.NumberFormat('en-US');
   // const parsedData = numberFormatter.format(JSON.parse(response).data.BTC.ohlc.h.toFixed(2));
-  const parsedData = numberFormatter.format(JSON.parse(response).data.BTC.circulatingSupply.toFixed(2));
+  // const parsedData = numberFormatter.format(JSON.parse(response).data.BTC.ohlc.c.toFixed(2));
+  const parsedData = numberFormatter.format(JSON.parse(response).data.BTC.ohlc.c);
   return of(parsedData ? parsedData : '');
 }
 
