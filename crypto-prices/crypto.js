@@ -1,4 +1,5 @@
 import CoinService from './CoinService.js'
+import CsvService from './data/btc-data.js'
 import searchInput$ from './search-input.js'
 const { interval, fromEvent, merge, empty } = rxjs;
 const { switchMap, scan, takeWhile, startWith, map, mapTo } = rxjs.operators;
@@ -6,7 +7,16 @@ const COUNTDOWN_SECONDS = 10;
 
 const app = document.querySelector('.app');
 const coinService = new CoinService();
-// console.log('coinService', coinService)
+const csvService = new CsvService();
+
+
+csvService.fetch().pipe(
+  map((data) => {
+    return data
+  })
+).subscribe();
+
+
 
 searchInput$.pipe(
   map(({ data }) => {
@@ -19,12 +29,9 @@ searchInput$.pipe(
 app.addEventListener('dataloaded', ({ detail }) => {
   const nameEl = app.querySelector('.name-output');
   const priceEl = app.querySelector('.price-output');
-  // nameEl.textContent = Object.values(detail.data)[0].name
-  // priceEl.textContent = Object.values(detail.data)[0].change.value;
-  // nameEl.textContent = detail.data.sym.value
 });
 
-coinService.fetchCoin('', app)
+// coinService.fetchCoin('', app)
 
 
 // Homemade Recusrive timer
@@ -36,7 +43,7 @@ const timer1 = (n) => {
     setTimeout(() => timer1(--n), 500)
   }
 };
-timer1(count)
+// timer1(count)
 
 /*
 

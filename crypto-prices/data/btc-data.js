@@ -1,18 +1,20 @@
+import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js'
+
 const { merge, of } = rxjs;
 const { fromFetch } = rxjs.fetch;
-const { map, mergeMap } = rxjs.operators;
+const { map, tap, mergeMap } = rxjs.operators;
 
 
 export default class {
   constructor() {
-    this.BASE_URL = `https://production.api.coindesk.com/v2/tb/price/ticker?assets=`;
+    this.BASE_URL = `./data/btc-coindesk-data.csv`;
     this.ALL_ASSETS_URL = `https://production.api.coindesk.com/v2/tb/price/ticker?assets=all`;
   }
 
-  fetch(url) {
+  fetch(url = this.BASE_URL) {
     return fromFetch(url).pipe(
-      mergeMap((response) => response.json()),
-      map(x => x.data)
+      mergeMap((response) => response.text()),
+      map(x => ham.csvToJson(x)),
     )
   }
 
