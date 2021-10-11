@@ -1,7 +1,7 @@
 //* https://blog.angular-university.io/rxjs-switchmap-operator/
 
 const { interval, of , fromEvent, merge, empty, delay, from } = rxjs;
-const { switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
+const { switchMap, scan, take, concatMap,takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
 
 // console.log('delay', delay);
 
@@ -13,7 +13,7 @@ function simulateHttp(val, del) {
 }
 
 console.log('simulating HTTP requests');
-const http1$ = simulateHttp("1", 1000);
+const http1$ = simulateHttp("1", 2000);
 const http2$ = simulateHttp("2", 1000);
 
 // http1$.subscribe(
@@ -56,13 +56,13 @@ function simulateFirebase(val, delay) {
   }));
 }
 
-const firebase1$ = simulateFirebase('BEAT 1 ', 400);
-const firebase2$ = simulateFirebase('BEAT 2 ', 1200);
+const firebase1$ = simulateFirebase('BEAT 1 ', 1200);
+const firebase2$ = simulateFirebase('BEAT 2 ', 800);
 
 
 //! Simple switchMap example
 const firebaseResult$ = firebase1$.pipe(
-  switchMap((sourceValue) => {
+  concatMap((sourceValue) => {
     console.log('source value ' + sourceValue);
     let newEl = document.createElement('div')
     newEl.textContent = 'BEAT 0 ' + sourceValue;

@@ -12,9 +12,28 @@ export default class {
   }
 
   fetch(url = this.BASE_URL) {
+  const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+  const numberFormatter = new Intl.NumberFormat('en-US');
+  const dateFormatter = new Intl.DateTimeFormat('en-US')
     return fromFetch(url).pipe(
       mergeMap((response) => response.text()),
-      map(x => ham.csvToJson(x)),
+      mergeMap(x => {
+        return of(ham.csvToJson(x))
+          .pipe(
+            map(x => {
+              console.log('Object.entries(x[0][0]).includes', Object.entries(x[0])[2][0].includes('USD'));
+              console.log('Object.entries(x[0][0])', Object.entries(x[0])[2][0]);
+              return x.map(record => {
+                for (let field in record) {
+                  // field.includes('USD') ? record[field] = currencyFormatter.format(+record[field]) : record[field] = record[field];
+                  field.includes('USD') ? record[field] = +numberFormatter.format((+record[field]).toFixed(2)) : record[field] = record[field];
+                  field.includes('Date') ? record[field] = dateFormatter.format(new Date(Date.parse(record[field]))) : record[field] = record[field];
+                }
+                return record
+              })
+            }),
+          )
+      })
     )
   }
 

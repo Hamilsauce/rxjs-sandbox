@@ -1,6 +1,6 @@
-import CoinService from './CoinService.js'
-import CsvService from './data/btc-data.js'
-import searchInput$ from './search-input.js'
+import CoinService from './CoinService.js';
+import CsvService from './data/btc-data.js';
+import searchInput$ from './search-input.js';
 const { interval, fromEvent, merge, empty } = rxjs;
 const { switchMap, scan, takeWhile, startWith, map, mapTo } = rxjs.operators;
 const COUNTDOWN_SECONDS = 10;
@@ -12,6 +12,10 @@ const csvService = new CsvService();
 
 csvService.fetch().pipe(
   map((data) => {
+    console.log('slut', data);
+    
+    app.querySelector('.json').firstElementChild.innerHTML = JSON.stringify(data, null, 3);
+    
     return data
   })
 ).subscribe();
@@ -25,11 +29,6 @@ searchInput$.pipe(
     return data
   })
 ).subscribe();
-
-app.addEventListener('dataloaded', ({ detail }) => {
-  const nameEl = app.querySelector('.name-output');
-  const priceEl = app.querySelector('.price-output');
-});
 
 // coinService.fetchCoin('', app)
 

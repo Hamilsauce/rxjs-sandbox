@@ -1,6 +1,6 @@
 //* https://blog.angular-university.io/rxjs-switchmap-operator/
-const { interval, of , timer, mergeMap, fromEvent, merge, empty, delay, from } = rxjs;
-const { switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTzbo } = rxjs.operators;
+const { interval, of , timer, fromEvent, merge, empty, delay, from } = rxjs;
+const { switchMap, mergeMap, scan, take, takeWhile, map, tap, startWith, filter, mapTzbo } = rxjs.operators;
 
 console.log('mergeMap', mergeMap)
 
@@ -19,30 +19,49 @@ function simulateFirebase(val, delay) {
     return `${val} ${index}`
   }));
 }
-const firebase1$ = simulateFirebase('OBS-1', 1200);
-const firebase2$ = simulateFirebase('OBS-2', 2400);
+const firebase1$ = simulateFirebase('OBS-1', 2500);
+const firebase2$ = simulateFirebase('OBS-2', 1500);
 
 
 //! Simple switchMap example
 const firebaseResult$ = firebase1$.pipe(
-  mergeMap((sourceValue) => {
-    console.log('source value ' + sourceValue);
-    let newEl = document.createElement('div')
-    newEl.textContent = 'INNER 1 ' + sourceValue;
-    log.appendChild(newEl)
-    return simulateFirebase('RESULT', 400);
+  switchMap((sourceValue) => {
+   firebase2$.pipe( mergeMap(() => sourceValue),
+      map(value => {
+        console.log('source value ' + sourceValue);
+        let newEl = document.createElement('div')
+        newEl.textContent = 'INNER 1 ' + sourceValue;
+        // console.log('simulateFirebase('OBS-2', 1500)', simulateFirebase('OBS-2', 1500)).appendChild(newEl))
+        return simulateFirebase('mew', 1600);
+      }),
+      map(value => {
+        console.log('source value ' + sourceValue);
+        let newEl = document.createElement('div')
+        newEl.textContent = 'INNER 1 ' + sourceValue;
+        log.appendChild(newEl)
+        // return simulateFirebase('RESULT', 1600);
+      })
+    )
   })
 );
-const merger$ = merge(firebase1$, firebase2$, firebaseResult$).pipe(
-  take(50),
-  mergeMap(x => {
-    x.pipe(
-      tap(x => console.log('in X mergemap pipe', x)),
-      map(x => x)
-    )
-  }),
-  tap(x => console.log('in mergemap pipe')),
-  tap(x => log.innerHTML = '')
+
+const createLogItem = (data) => {
+  const el = document.createElement('div');
+  el.dataset.count = data;
+  el.classList.add('item')
+  return el;
+}
+
+
+const merger$ = merge(firebase1$, firebase2$).pipe(
+  take(16),
+  // mergeMap(x => {
+  // map((x,i) => x),
+  tap(x => console.log('in mergemap pipe', x)),
+  tap(x => log.appendChild(createLogItem(x))),
   // timer(2000),
+  // tap(x => log.innerHTML = ''),
+
 );
-merger$.subscribe(console.log, console.error, () => console.log('completed firebaseResult$'));
+firebaseResult$.subscribe()
+// merger$.subscribe(console.log, console.error, () => console.log('completed firebaseResult$'));

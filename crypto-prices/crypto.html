@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title></title>
-  <link rel="stylesheet" href="./crypto.css" type="text/css" media="all" />
+  <script src='https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js" integrity="sha512-y3JTS47nnpKORJX8Jn1Rlm+QgRIIZHtu3hWxal0e81avPrqUH48yk+aCi+gprT0RMAcpYa0WCkapxe+bpBHD6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- <script src='https://cdn.jsdelivr.net/npm/chart.js@2  .9.3/dist/Chart.min.js'></script> -->
+  <link rel="stylesheet" href="./crypto.css" type="text/css" media="all" />
+  <!-- <script src='https://cdn.jsdelivr.net/npm/chart.js@2  .9.3/dist/Chart.min.js'></script> -->
 </head>
 
 <body>
@@ -24,6 +27,9 @@
         </button>
       </div>
     </div>
+    <div class="chart-container">
+      <canvas id="chart" class="chart" width="350" height="300" ref="chart"></canvas>
+    </div>
     <div class="crypto">
       <div class="input-group">
         <label for="input-group--search">Enter a coin</label>
@@ -34,9 +40,16 @@
         <div class="price-output">$5</div>
       </div>
     </div>
+    <div class="json">
+      <pre></pre>
+    </div>
   </div>
   <!-- <script src="./muto.js" type="module" charset="utf-8"></script> -->
-  <script src="./crypto.js" type="module" charset="utf-8"></script>
+  <!-- <script src="./crypto.js" type="module" charset="utf-8"></script> -->
+  <!-- <script src="./data/chart1.js" charset="utf-8"></script> -->
+  <!-- <script src="./data/chart2.js" charset="utf-8"></script> -->
+  <!-- <script src="./data/btcChart.js" charset="utf-8"></script> -->
+  <script src="./data/btc-chart.js" charset="utf-8"></script>
   <!-- <script src="./CoinService.js" type="module" charset="utf-8"></script> -->
   <!-- <script src="./search-input.js" type="module" charset="utf-8"></script> -->
 </body>
