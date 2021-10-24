@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title></title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./subject.css" type="text/css" media="all" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js" integrity="sha512-y3JTS47nnpKORJX8Jn1Rlm+QgRIIZHtu3hWxal0e81avPrqUH48yk+aCi+gprT0RMAcpYa0WCkapxe+bpBHD6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+  <main class="app">
+    <header class="app-header">
+      <div class="header-title">BIG CAL</div>
+      <div class="header-date"></div>
+    </header>
+    <div class="router-view">
+      <div class="calendar">
+        <div class="calendar-top-row">
+          <!-- <div id="intervalValue"></div> -->
+          <div class="calendar-month-display"></div>
+          <div class="calendar-toolbar">
+            <div class="toolbar-button">View</div>
+            <div class="toolbar-button">New</div>
+            <div class="toolbar-button">Clear</div>
+          </div>
+        </div>
+        <div class="day-label-container">
+          <div class="day-label" data-day-name="monday">Mon</div>
+          <div class="day-label" data-day-name="wednesday">Wed</div>
+          <div class="day-label" data-day-name="friday">Fri</div>
+          <div class="day-label" data-day-name="thursday">Thu</div>
+          <div class="day-label" data-day-name="saturday">Sat</div>
+          <div class="day-label" data-day-name="tuesday">Tue</div>
+          <div class="day-label" data-day-name="sunday">Sun</div>
+        </div>
+        <div class="calendar-body">
+          <!--   <div class="calendar-month"> -->
+          <div class="calendar-day" data-day-number="1" data-day-name="monday">Mon</div>
+          <div class="calendar-day" data-day-number="2" data-day-name="wednesday">Wed</div>
+          <div class="calendar-day" data-day-number="3" data-day-name="friday">Wed</div>
+          <div class="calendar-day" data-day-number="4" data-day-name="thursday">Wed</div>
+          <div class="calendar-day" data-day-number="5" data-day-name="saturday">Wed</div>
+          <div class="calendar-day" data-day-number="6" data-day-name="tuesday">Wed</div>
+          <div class="calendar-day" data-day-number="7" data-day-name="sunday">Wed</div>
+          <div class="calendar-day" data-day-number="8" data-day-name="wednesday">Wed</div>
+          <div class="calendar-day" data-day-number="9" data-day-name="wednesday">Wed</div>
+          <div class="calendar-day" data-day-number="11" data-day-name="monday">Mon</div>
+          <div class="calendar-day" data-day-number="12" data-day-name="wednesday">Wed</div>
+          <div class="calendar-day" data-day-number="13" data-day-name="friday">Wed</div>
+          <div class="calendar-day" data-day-number="14" data-day-name="thursday">Wed</div>
+          <div class="calendar-day" data-day-number="15" data-day-name="saturday">Wed</div>
+          <div class="calendar-day" data-day-number="16" data-day-name="tuesday">Wed</div>
+          <div class="calendar-day" data-day-number="17" data-day-name="sunday">Wed</div>
+          <div class="calendar-day" data-day-number="18" data-day-name="monday">Mon</div>
+          <div class="calendar-day" data-day-number="19" data-day-name="wednesday">Wed</div>
+          <div class="calendar-day" data-day-number="20" data-day-name="friday">Wed</div>
+          <div class="calendar-day" data-day-number="21" data-day-name="thursday">Wed</div>
+          <div class="calendar-day" data-day-number="22" data-day-name="saturday">Wed</div>
+          <div class="calendar-day" data-day-number="23" data-day-name="tuesday">Wed</div>
+          <div class="calendar-day" data-day-number="24" data-day-name="sunday">Wed</div>
+          <div class="calendar-day" data-day-number="25" data-day-name="friday">Wed</div>
+          <div class="calendar-day" data-day-number="26" data-day-name="thursday">Wed</div>
+          <div class="calendar-day" data-day-number="27" data-day-name="saturday">Wed</div>
+          <div class="calendar-day" data-day-number="28" data-day-name="tuesday">Wed</div>
+          <div class="calendar-day" data-day-number="29" data-day-name="sunday">Wed</div>
+        </div>
+        <!--  </div> -->
+      </div>
+    </div>
+  </main>
+  <script src="./subject.js" type="module" charset="utf-8"></script>
+  <script src="./script.js" type="module" charset="utf-8"></script>
+  <!-- <script src="./services/swipe.js" type="module" charset="utf-8"></script> -->
+  <!-- <script src="./data/cal-parser.js" type="module" charset="utf-8"></script> -->
+</body>
+
+</html>

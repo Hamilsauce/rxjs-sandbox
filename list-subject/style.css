@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  z-index: 0;
+}
+
+.app {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 100vw;
+  height: 100vh;
+
+}
+
+.item {
+  background: #C4C4CD;
+  min-width: 33%;
+  min-height: 50%;
+}

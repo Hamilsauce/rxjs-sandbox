@@ -55,35 +55,37 @@ switchMap(profile => {
       })
 		);
 	}
+	
+	// Takes 
 
-	sendInvestorWithdrawal(reqid) {
-		const activeRequest$ = this.getActiveRequest(reqid).pipe(map((_) => _.get('amount')));
-		return this.geoLocationData.pipe(
-			take(1),
-			mergeMap((geolocation) => {
-				return this.gidxService.callCustomerMonitor(geolocation).pipe(
-					take(1),
-					switchMap((res) => {
-						return activeRequest$.pipe(
-							take(1),
-							mergeMap((amount) => {
-								return res.result.length === 0
-									? this.ngFireFunctions
-											.httpsCallable('httpApis-addTransfer')({
-												clientGPS: geolocation.clientGPS,
-												transferAmount: amount,
-												transferType: 'WITHDRAWAL',
-											})
-											.pipe(map((_) => _.text))
-									: of(res.result);
-							})
-						);
-					})
-				);
-			})
-		);
-	}
-
+  sendInvestorWithdrawal(reqid: string): Observable <string | string[]> {
+  
+    const activeRequest$ = this.getActiveRequest(reqid).pipe(map(_ => _.get('amount')));
+    
+    return this.geoLocationData.pipe(
+      mergeMap(geolocation => {
+        return this.gidxService.callCustomerMonitor(geolocation).pipe(
+          take(1),
+          switchMap(res => {
+            return activeRequest$.pipe(
+              mergeMap(amount => {
+                return res.result.length === 0 ?
+                  this.ngFireFunctions
+                  .httpsCallable('httpApis-addTransfer')({
+                    clientGPS: geolocation.clientGPS,
+                    transferAmount: amount,
+                    transferType: 'WITHDRAWAL',
+                  })
+                  .pipe(map((_: any) => _.text)) :
+                  of (res.result);
+              })
+            );
+          })
+        );
+      })
+    );
+  }
+  
 	initiateNewWithdrawal(transferAmount) {
 		return this.geoLocationData.pipe(
 			take(1),

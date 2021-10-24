@@ -1,0 +1,100 @@
+[
+   {
+      "ID": "3",
+      "TASK": "Mobile ready the subscribe screens",
+      "NOTES": "",
+      "OWNER": "Jake",
+      "STATUS": "Not Started"
+   },
+   {
+      "ID": "8",
+      "TASK": "Initial Portfolio graph needs to be a single straight line",
+      "NOTES": "",
+      "OWNER": "Jake",
+      "STATUS": "Not Started"
+   },
+   {
+      "ID": "9",
+      "TASK": "Graph Intra day needs 5 minute intervals ???",
+      "NOTES": "",
+      "OWNER": "Jake",
+      "STATUS": "Not Started"
+   },
+   {
+      "ID": "11",
+      "TASK": "GIDX wait states and styles",
+      "NOTES": "",
+      "OWNER": "Jake",
+      "STATUS": "Not Started"
+   },
+   {
+      "ID": "12",
+      "TASK": "Wire in news feed",
+      "NOTES": "",
+      "OWNER": "Jake",
+      "STATUS": "Not Started"
+   },
+   {
+      "ID": "16",
+      "TASK": "Close firebase value changes on specific component destorys",
+      "NOTES": "",
+      "OWNER": "Jake",
+      "STATUS": "Not Started"
+   },
+   {
+      "ID": "18",
+      "TASK": "Remove \"minimal\" shell from screens other than Subscribe screens",
+      "NOTES": "",
+      "OWNER": "Jake",
+      "STATUS": "Not Started"
+   },
+   {
+      "ID": "4",
+      "TASK": "Method to log during subscribe (create another account or back to login) ?",
+      "NOTES": "",
+      "OWNER": "Ian",
+      "STATUS": "Not Started"
+   },
+   {
+      "ID": "6",
+      "TASK": "Email verification should send you back to Portfolio page on verified (may require a trigger on Firebase Auth)",
+      "NOTES": " ",
+      "OWNER": "ian",
+      "STATUS": "Not Started"
+   },
+   {
+      "ID": "34",
+      "TASK": "remove cancel order button when clicked/if ordertype === cancel_bid or _ask",
+      "NOTES": "",
+      "OWNER": "jake",
+      "STATUS": "Not Started"
+   },
+   {
+      "ID": "11",
+      "TASK": "Watch List and Holdings put some phrase if empty",
+      "NOTES": "placeholder text",
+      "OWNER": "Jake",
+      "STATUS": "Started"
+   },
+   {
+      "ID": "17",
+      "TASK": "Look into route back button from payment or trade screen",
+      "NOTES": "Might be fixed",
+      "OWNER": "Jake",
+      "STATUS": "Started"
+   },
+   {
+      "ID": "28",
+      "TASK": "Check Market Day calendar on player detail / when submitting orders",
+      "NOTES": "",
+      "OWNER": "jake",
+      "STATUS": "Started"
+   },
+   {
+      "ID": "33",
+      "TASK": "debounce order Submit Buttons",
+      "NOTES": "",
+      "OWNER": "jake",
+      "STATUS": "Started"
+   }
+]

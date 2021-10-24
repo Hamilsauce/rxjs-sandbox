@@ -3,7 +3,6 @@ export default class {
     this.BASE_URL = `https://production.api.coindesk.com/v2/tb/price/ticker?assets=`;
     this.ALL_ASSETS_URL = `https://production.api.coindesk.com/v2/tb/price/ticker?assets=all`;
     // console.log('[...listeners]', listeners)
-
     // this.subscribe.bind(this);
   }
 
@@ -12,7 +11,6 @@ export default class {
   }
 
   getCoinUrl(sym) {
-  
     return `https://production.api.coindesk.com/v2/tb/price/ticker?assets=${sym}`;
   }
 
