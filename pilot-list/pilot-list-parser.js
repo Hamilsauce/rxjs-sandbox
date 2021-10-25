@@ -1,37 +1,70 @@
 import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
-import {columns, columns$} from './data/schema.js'
-
 import DataService from './services/DataService.js'
+import { columns, columns$ } from './data/schema.js'
+
 
 const dataService = new DataService();
-
+const server = 'http://localhost:3000/list'
 
 const { array } = ham;
 
-const { interval, of , fromEvent, merge, empty, delay, from } = rxjs;
-const { switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
+const { iif, ReplaySubject, Subject, interval, of , fromEvent, merge, empty, delay, from } = rxjs;
+const { throttleTime,mergeMap,switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
 
-// help('pilot list kine 4')
-const data = await dataService.fetch('./data/list-data.json')
-const listData = await data.json()
-console.log(listData);
+/*
+NEED JSON SERVER RUNNING IN TERMUX
+*/
 
-const newData = listData.map(item => {
-  return  {...item, ID: +item.ID }
-})
+const r$ = of (`I'm saying R!!`);
+const x$ = of (`X's always win!!`);
+fromEvent(document.body, 'touchmove')
+  .pipe(
+    
+    throttleTime(500),
+    filter((move) => move.changedTouches[0].clientY < 810),
+  tap(x => console.log('x', x)),
+    map((move) => move.changedTouches[0].clientY),
+    mergeMap(yCoord => iif(() => yCoord < 110, r$, x$))
+  )
+  .subscribe(console.log);
 
-newData.push({
+
+const subject$ = new ReplaySubject(); // Pull values
+
+const listData$ = dataService.fetch(server + '')
+// const listData = await data.json()
+
+const data$ = listData$.pipe(
+  map(x => x),
+  tap(x => console.log('x', x)),
+  )
+data$.subscribe(x => console.log('ldata' , x))
+
+// const subscriber = { next: (v) => console.log('suber', v) }
+
+// subject$.subscribe(subscriber)
+
+// console.log('lisyda', listData);
+// data$.subscribe(subject$)
+
+// const newData = listData.map(item => {
+//   return { ...item, ID: +item.ID }
+// })
+
+const newItem = {
   ID: 50,
   TASK: 'Suck',
   NOTES: 'Did it',
   OWNER: 'Butt',
   STATUS: 'Done'
-})
+}
 // console.log('res', newData);
 
-const response = await dataService.sendFetch(newData, './data/list-data.json')
-const result = await response.json()
-console.log('ressult', result);
+
+// const response = await dataService.sendFetch(newItem, './data/list-data.json')
+// const response = await dataService.sendFetch(newItem, server)
+// const result = await response.json()
+// console.log('ressult', result);
 
 // console.log('send', send)
 
@@ -91,4 +124,3 @@ let dataBody;
 // console.log('createRecord(parseRawIntoData(src)[0])',
 //   buildDataset(columns, parseRawIntoData(src))
 // )
-
