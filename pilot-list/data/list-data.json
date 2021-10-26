@@ -1,100 +1,101 @@
-{[
+{
+  "list":[
    {
       "id": 3,
-      "TASK": "Mobile ready the subscribe screens",
-      "NOTES": "",
-      "OWNER": "Jake",
-      "STATUS": "Not Started"
+      "task": "Mobile ready the subscribe screens",
+      "notes": "",
+      "owner": "Jake",
+      "status": "Not Started"
    },
    {
       "id": 8,
-      "TASK": "Initial Portfolio graph needs to be a single straight line",
-      "NOTES": "",
-      "OWNER": "Jake",
-      "STATUS": "Not Started"
+      "task": "Initial Portfolio graph needs to be a single straight line",
+      "notes": "",
+      "owner": "Jake",
+      "status": "Not Started"
    },
    {
       "id": 9,
-      "TASK": "Graph Intra day needs 5 minute intervals ???",
-      "NOTES": "",
-      "OWNER": "Jake",
-      "STATUS": "Not Started"
+      "task": "Graph Intra day needs 5 minute intervals ???",
+      "notes": "",
+      "owner": "Jake",
+      "status": "Not Started"
    },
    {
       "id": 11,
-      "TASK": "GIDX wait states and styles",
-      "NOTES": "",
-      "OWNER": "Jake",
-      "STATUS": "Not Started"
+      "task": "GIDX wait states and styles",
+      "notes": "",
+      "owner": "Jake",
+      "status": "Not Started"
    },
    {
       "id": 12,
-      "TASK": "Wire in news feed",
-      "NOTES": "",
-      "OWNER": "Jake",
-      "STATUS": "Not Started"
+      "task": "Wire in news feed",
+      "notes": "",
+      "owner": "Jake",
+      "status": "Not Started"
    },
    {
       "id": 16,
-      "TASK": "Close firebase value changes on specific component destorys",
-      "NOTES": "",
-      "OWNER": "Jake",
-      "STATUS": "Not Started"
+      "task": "Close firebase value changes on specific component destorys",
+      "notes": "",
+      "owner": "Jake",
+      "status": "Not Started"
    },
    {
       "id": 18,
-      "TASK": "Remove \"minimal\" shell from screens other than Subscribe screens",
-      "NOTES": "",
-      "OWNER": "Jake",
-      "STATUS": "Not Started"
+      "task": "Remove \"minimal\" shell from screens other than Subscribe screens",
+      "notes": "",
+      "owner": "Jake",
+      "status": "Not Started"
    },
    {
       "id": 4,
-      "TASK": "Method to log during subscribe (create another account or back to login) ?",
-      "NOTES": "",
-      "OWNER": "Ian",
-      "STATUS": "Not Started"
+      "task": "Method to log during subscribe (create another account or back to login) ?",
+      "notes": "",
+      "owner": "Ian",
+      "status": "Not Started"
    },
    {
       "id": 6,
-      "TASK": "Email verification should send you back to Portfolio page on verified (may require a trigger on Firebase Auth)",
-      "NOTES": " ",
-      "OWNER": "ian",
-      "STATUS": "Not Started"
+      "task": "Email verification should send you back to Portfolio page on verified (may require a trigger on Firebase Auth)",
+      "notes": " ",
+      "owner": "ian",
+      "status": "Not Started"
    },
    {
       "id": 34,
-      "TASK": "remove cancel order button when clicked/if ordertype === cancel_bid or _ask",
-      "NOTES": "",
-      "OWNER": "jake",
-      "STATUS": "Not Started"
+      "task": "remove cancel order button when clicked/if ordertype === cancel_bid or _ask",
+      "notes": "",
+      "owner": "jake",
+      "status": "Not Started"
    },
    {
       "id": 11,
-      "TASK": "Watch List and Holdings put some phrase if empty",
-      "NOTES": "placeholder text",
-      "OWNER": "Jake",
-      "STATUS": "Started"
+      "task": "Watch List and Holdings put some phrase if empty",
+      "notes": "placeholder text",
+      "owner": "Jake",
+      "status": "Started"
    },
    {
       "id": 17,
-      "TASK": "Look into route back button from payment or trade screen",
-      "NOTES": "Might be fixed",
-      "OWNER": "Jake",
-      "STATUS": "Started"
+      "task": "Look into route back button from payment or trade screen",
+      "notes": "Might be fixed",
+      "owner": "Jake",
+      "status": "Started"
    },
    {
       "id": 28,
-      "TASK": "Check Market Day calendar on player detail / when submitting orders",
-      "NOTES": "",
-      "OWNER": "jake",
-      "STATUS": "Started"
+      "task": "Check Market Day calendar on player detail / when submitting orders",
+      "notes": "",
+      "owner": "jake",
+      "status": "Started"
    },
    {
       "id": 33,
-      "TASK": "debounce order Submit Buttons",
-      "NOTES": "",
-      "OWNER": "jake",
-      "STATUS": "Started"
+      "task": "debounce order Submit Buttons",
+      "notes": "",
+      "owner": "jake",
+      "status": "Started"
    }
 ]}

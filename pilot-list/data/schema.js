@@ -7,19 +7,19 @@ const { switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } =
 
 
 export const columns = [
-  { name: 'ID', type: 'number', order: 0 },
-  { name: 'TASK', type: 'string', order: 1 },
-  { name: 'NOTES', type: 'string', order: 2 },
-  { name: 'OWNER', type: 'string', order: 3 },
-  { name: 'STATUS', type: 'string', order: 4 },
+  { name: 'id', type: 'number', order: 0 },
+  { name: 'task', type: 'string', order: 1 },
+  { name: 'notes', type: 'string', order: 2 },
+  { name: 'owner', type: 'string', order: 3 },
+  { name: 'status', type: 'string', order: 4 },
 ].sort((a, b) => a.order - b.order);
 
 export const columns$ = of ([
-  { name: 'ID', type: 'number', order: 1 },
-  { name: 'TASK', type: 'string', order: 2 },
-  { name: 'NOTES', type: 'string', order: 3 },
-  { name: 'OWNER', type: 'string', order: 4 },
-  { name: 'STATUS', type: 'string', order: 5 },
+  { name: 'id', type: 'number', order: 1 },
+  { name: 'task', type: 'string', order: 2 },
+  { name: 'notes', type: 'string', order: 3 },
+  { name: 'owner', type: 'string', order: 4 },
+  { name: 'status', type: 'string', order: 5 },
 ].sort((a, b) => a.order - b.order));
 
 {columns, columns$}
