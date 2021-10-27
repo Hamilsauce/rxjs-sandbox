@@ -1,6 +1,6 @@
 import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
 import DataService from './services/DataService.js'
-import Table from './components/table.js'
+import {List,Card} from './components/table.js'
 import { columns, columns$ } from './data/schema.js'
 
 
@@ -9,7 +9,7 @@ const server = 'http://localhost:3000/list'
 
 const { array } = ham;
 
-const { iif, ReplaySubject, Subject, interval, of , fromEvent, merge, empty, delay, from } = rxjs;
+const { iif, ReplaySubject,AsyncSubject, Subject, interval, of , fromEvent, merge, empty, delay, from } = rxjs;
 const { throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
 
 /*
@@ -19,11 +19,11 @@ NEED JSON SERVER RUNNING IN TERMUX
 const app = document.querySelector('.app')
 const tableContainer = app.querySelector('.table-container')
 
-const pilotListSubject$ = dataService.pilotListSubject$
+const listDataSubject$ = dataService.listDataSubject$
 dataService.fetch(server + '')
-// const table = new Table(pilotListSubject$);
+// const table = new Table(listDataSubject$);
 
-const listData$ = pilotListSubject$.pipe(
+const listData$ = listDataSubject$.pipe(
   // take(1),
   filter(x => x !== undefined),
   tap(x => console.log('x', x)),
@@ -39,8 +39,8 @@ const newItem = {
   STATUS: 'Done'
 }
 
-const table = new Table(columns,  columns$, pilotListSubject$);
-console.log('table', table);
+const list = new List(columns,  columns$, listDataSubject$);
+console.log('list', list);
 
 // tableContainer.innerHTML = table.template()
 

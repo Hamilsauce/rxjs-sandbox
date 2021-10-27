@@ -6,12 +6,13 @@ import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
 // const dataService = new DataService();
 const server = 'http://localhost:3000/list'
 
-const { array, utils, help } = ham;
-console.log(utils)
+const { array, utils, help, DOM } = ham;
+// console.log(utils)
 const { iif, ReplaySubject, Subject, interval, of , fromEvent, merge, empty, delay, from } = rxjs;
-const { throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
+const { throttleTime, distinctUntilChanged, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
 
-
+// console.log('distinctUntilChanged', distinctUntilChanged)
+// console.log('help', help())
 /*
  *  CREATING LIST
  *  1. Split text into rows, find the row with most columns if any;
@@ -19,23 +20,35 @@ const { throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, star
  *  2. Create Observable from split text
  */
 
-// TABLE COMPONENT
-export default class {
-  constructor(columns, columns$, listSubject$) {
-    console.log('columns', columns)
-    this.columns = columns
-    this.columns$ = columns$
+// TODO TABLE COMPONENT
+export class List {
+  constructor(schema, schema$, listSubject$) {
+    // console.log('schema', schema)
+    this.schema = schema
+    this.schema$ = schema$
     this.listSubject$ = listSubject$;
+    this.items = [];
+    this.root = document.createElement('div')
+    this.root.classList.add('list');
+    
 
     listSubject$.pipe(
       filter(_ => _ !== undefined),
+      distinctUntilChanged(),
+      // tap(x => console.log('x im table', x)),
       map(data => {
-        return data.map((_, i) => this.createRowTemplate(this.columns, _, i))
+        return data.map((record, i) => {
+          console.log('djdjd', [record, i]);
+          return new Card(({ ...this.schema }), of ({ ...record }), i) //.render(this.schema, data);
+
+          return this.createRowTemplate(this.schema, _, i)
+        })
         // return data
       }),
-      map(x => this.template(this.columns, x)),
-      tap(x => console.log('x', x)),
-      tap(x => document.querySelector('.table-container').innerHTML = x),
+      // tap(x => console.log('x im table', x)),
+      tap(x => x.forEach(({element}) => this.root.appendChild(element))),
+      // map(x => this.createListItem(this.schema, x)),
+      tap(x => document.querySelector('.app').appendChild(this.root))
     ).subscribe()
   }
 
@@ -43,37 +56,70 @@ export default class {
     return utils.getValueType(value) === dataType;
   }
 
+  // 
+  createListItem(column, record = {}, rowIndex) {
+    // console.log('createListItem', [column, record, rowIndex]);
+    return
 
-  createRowTemplate(cols, record = {}, index) {
-    return `
-      <tr class="table__row" data-row-index="${index}">
-        ${Object.entries(record)
-          .reduce((acc, [key, value], i) => {
-            const col = cols.find(_ => _.name === key);
-            console.log('acc', acc)
-            return `${acc}<td class="table__row--field" headers="${col.name}" data-column-order="${col.order}" data-column-name="${col.name}" data-data-type="${col.type}">${this.validateField(col.type, value) ? value : 'ERR'}</td>\n`},'')}
-      </tr>` //.join('');
   }
 
-  template(columns, rowMarkup) {
-    return `
-      <table  class="table">
-        <thead>
-        <tr class="table__headers>
-          ${columns.reduce((acc, col, i) => {
-            console.log('[column, columns, key, value]', [col, col,i]);
-              return [...acc,`<th class="table__headers--header" id="${col.name}" data-column-order="${col.order}" data-column-name="${col.name}" data-data-type="${col.type}">${col.name}</th>`.replace(',','')];
-            },[`<th class="table__headers--header" id="${columns[0].name}" data-column-order="${columns[0].order}" data-column-name="${columns[0].name}" data-data-type="${columns[0].type}">${ columns[0].name }</th>`]).join('\n')
-          } 
-        <tr>
-        <thead>
-        <tbody>
-          ${rowMarkup.join('')}
-        </tbody>
-      </table>`
+}
+
+// TODO CARD COMP
+export class Card {
+  // schema === columns
+  constructor(schema, data$, index, ...config) {
+    this.schema = schema
+    this.data$ = data$;
+    this.index = index
+    
+    // console.log('render(schema, itemData)', [schema, data$]);
+
+    this.data$.pipe(
+      filter(_ => _ !== undefined),
+      tap(x => console.log('in Card data pipe', x)),
+      map(x => this.render(this.schema, x)),
+      tap(x => this.element = x),
+      // tap(x => console.log('after render', x)),
+      // tap(x => document.querySelector('.table-container').innerHTML = x),
+    ).subscribe()
   }
 
+  validateField(dataType, value) {
+    return utils.getValueType(value) === dataType;
+  }
 
+  // 
+  createRowTemplate(column, record = {}, rowIndex) {
+    return
+
+  }
+
+  render(schema, itemData) {
+    // console.log('render(schema, itemData)', [schema, itemData]);
+    const root = DOM.newElement('div', {
+      classList: ['list-item', 'list-card'],
+      // data: { index: itemData.id },
+
+    });
+
+    const itemEls = Object.entries(itemData)
+      .reduce((acc,[key, value], i) => {
+        // console.log('[key, value]', [key, value]);
+
+        const el = DOM.newElement('div', {
+          classList: [`item-${key}`, 'item-element'],
+          data: { itemElement: value, order: schema.order, itemName: schema.name, dataType: schema.type },
+        });
+        el.innerHTML =
+          `<div class="item-${key}-label">${key}</div>
+        <div class="item-${key}-content">${value}</div>`;
+        acc.appendChild(el);
+        
+        return acc;
+      }, root);
+return root
+  }
 }
 
 
@@ -83,7 +129,7 @@ const parseRawIntoData = (txt = '') => { return txt.split('\n').map(row => row.t
 const createRecord = (cols = [], record = []) => {
   return Object.entries(newRec).map(rec => {
     const entries =
-      console.log(rec);
+      // console.log(rec);
     return entries
   })
 
@@ -105,8 +151,10 @@ dataBody = buildDataset(columns, parseRawIntoData(src))
 
 pre.innerHTML = JSON.stringify(dataBody, null, 3)
 
-console.log('createRecord(parseRawIntoData(src)[0])',
+// console.log('createRecord(parseRawIntoData(src)[0])',
   buildDataset(columns, parseRawIntoData(src))
 )
 
 */
+
+{ List, Card }

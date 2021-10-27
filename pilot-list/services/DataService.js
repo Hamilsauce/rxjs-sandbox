@@ -1,11 +1,11 @@
-const { ReplaySubject, merge, of } = rxjs;
+const { AsyncSubject, ReplaySubject, merge, of } = rxjs;
 const { fromFetch } = rxjs.fetch;
 const { map, filter, mergeMap } = rxjs.operators;
 const { ajax } = rxjs.ajax
 export default class {
   constructor() {
-    this.pilotListSubject$ = new ReplaySubject();
-    this.pilotListSubject$.next()
+    this.listDataSubject$ = new AsyncSubject();
+    this.listDataSubject$.next()
     this.BASE_URL = `../data/list-data.json`
     this.ALL_ASSETS_URL = `https://production.api.coindesk.com/v2/tb/price/ticker?assets=all`;
     this.fetchSub;
@@ -18,9 +18,9 @@ export default class {
       filter(_ => _ !== undefined),
       mergeMap((response) => response.json()),
       // map(x => x.data)
-    ).subscribe(this.pilotListSubject$);
+    ).subscribe(this.listDataSubject$);
 
-    // return this.pilotListSubject$
+    // return this.listDataSubject$
   }
 
   async sendFetch(val, url) {
@@ -40,7 +40,7 @@ export default class {
     //     mergeMap((response) => response.json()),
     //   )
     // this.fetch(url)
-    this.pilotListSubject$.next()
+    this.listDataSubject$.next()
     return await response.json()
   }
 
