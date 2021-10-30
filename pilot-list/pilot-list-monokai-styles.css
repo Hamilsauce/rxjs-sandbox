@@ -22,7 +22,7 @@
 
     /* Code blocks */
     pre[class*="language-"] {
-      padding: .8em;
+      padding: 1.8em;
       overflow: auto;
       /* border: 1px solid #ddd; */
       border-radius: 3px;
